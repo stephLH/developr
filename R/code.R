@@ -34,7 +34,7 @@ code_find <- function(code, path = getwd()) {
 #' @export
 code_replace <- function(code, replacement, path) {
 
-  fichiers <- divr::code_find(code, path) %>%
+  fichiers <- developr::code_find(code, path) %>%
     dplyr::pull(fichier) %>%
     unique()
 

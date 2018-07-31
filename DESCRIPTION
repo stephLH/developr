@@ -1,12 +1,18 @@
 Package: developr
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Additional functions to help package development.
+Version: 0.1
+Authors@R: person("Stéphane Le Hénanff", "Stéphane Le Hénanff", email = "github@le-henanff.fr", role = c("aut", "cre"))
+Maintainer: Stéphane Le Hénanff <github@le-henanff.fr>
+Description: Additional functions to help package development.
+License: Etalab
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
+Imports:
+    devtools,
+    dplyr,
+    purrr,
+    readr,
+    stringr,
+    tidyr
