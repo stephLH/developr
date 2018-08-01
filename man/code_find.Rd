@@ -12,7 +12,7 @@ code_find(code, path = getwd())
 \item{path}{Path where R and Rmd files are located.}
 }
 \value{
-A data frame with three fields : file, line number and code containing researched syntax.
+A data frame with three columns : file, line number and code containing researched syntax.
 }
 \description{
 Look for code inside R or Rmd scripts.

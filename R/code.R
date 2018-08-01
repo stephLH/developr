@@ -3,7 +3,7 @@
 #' @param code R syntax to search.
 #' @param path Path where R and Rmd files are located.
 #'
-#' @return A data frame with three fields : file, line number and code containing researched syntax.
+#' @return A data frame with three columns : file, line number and code containing researched syntax.
 #'
 #' @export
 code_find <- function(code, path = getwd()) {
