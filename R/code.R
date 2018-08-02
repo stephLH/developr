@@ -8,11 +8,11 @@
 #' @export
 code_find <- function(code, path = getwd()) {
 
-  fichiers <- list.files(path, recursive = TRUE, pattern = "\\.(R|Rmd)$", full.names = TRUE)
+  files <- list.files(path, recursive = TRUE, pattern = "\\.(R|Rmd)$", full.names = TRUE)
 
   code_find <- dplyr::tibble(
-    fichier = fichiers,
-    code = purrr::map(fichiers, readr::read_table, col_names = "code", col_types = "c")
+    fichier = files,
+    code = purrr::map(files, readr::read_table, col_names = "code", col_types = "c")
   ) %>%
     tidyr::unnest() %>%
     dplyr::group_by(fichier) %>%
@@ -34,12 +34,12 @@ code_find <- function(code, path = getwd()) {
 #' @export
 code_replace <- function(code, replacement, path) {
 
-  fichiers <- developr::code_find(code, path) %>%
+  files <- developr::code_find(code, path) %>%
     dplyr::pull(fichier) %>%
     unique()
 
-  import_code <- purrr::map(fichiers, readr::read_lines) %>%
+  import_code <- purrr::map(files, readr::read_lines) %>%
     purrr::map(stringr::str_replace_all, code, replacement)
 
-  purrr::walk2(import_code, fichiers, readr::write_lines)
+  purrr::walk2(import_code, files, readr::write_lines)
 }
