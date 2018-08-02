@@ -4,14 +4,16 @@
 \alias{package_deps}
 \title{Get package dependancies.}
 \usage{
-package_deps(package_path = getwd())
+package_deps(package_path = getwd(), include_rmd = TRUE)
 }
 \arguments{
 \item{package_path}{Package path.}
+
+\item{include_rmd}{If \code{TRUE} then find dependances into Rmd files as well.}
 }
 \value{
 A dependencies vector.
 }
 \description{
-Get package dependancies.
+Find packages dependances declared into R scripts and Rmd files.
 }
