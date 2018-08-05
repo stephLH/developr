@@ -1,2 +1,2 @@
 # developr
-R functions to help package building
+R functions to help package development
