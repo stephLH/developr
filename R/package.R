@@ -29,13 +29,14 @@ package_deps <- function(package_path = getwd(), include_rmd = TRUE) {
 #' @param documentation If \code{TRUE}, documentation is also generated.
 #'
 #' @export
-package_build <- function(package_path, documentation = TRUE) {
+package_build <- function(package_path = ".", documentation = TRUE) {
 
   if (documentation == TRUE) {
     devtools::document(package_path, roclets = c('rd', 'collate', 'namespace'))
   }
 
-  devtools::RCMD("INSTALL", paste0("--no-multiarch --with-keep.source \"", package_path, "\""))
+  package_path <- ifelse(package_path == ".", getwd(), package_path)
+  build <- devtools::RCMD("INSTALL", paste0("--no-multiarch --with-keep.source \"", package_path, "\""))
 
-  .rs.restartR()
+  restart <- .rs.restartR()
 }

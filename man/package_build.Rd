@@ -4,7 +4,7 @@
 \alias{package_build}
 \title{Build a package.}
 \usage{
-package_build(package_path, documentation = TRUE)
+package_build(package_path = ".", documentation = TRUE)
 }
 \arguments{
 \item{package_path}{Package path.}
