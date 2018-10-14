@@ -40,3 +40,44 @@ package_build <- function(package_path = ".", documentation = TRUE) {
 
   restart <- .rs.restartR()
 }
+
+#' Copy Microsoft Access tables to an R package data/ folder.
+#'
+#' @param access_path Microsoft Access database path.
+#' @param data_path R packaga data path.
+#' @param tables Optional selection of tables to copy.
+#' @param tables_rda Optional tables names to save in data/.
+#'
+#' @export
+access_rda <- function(access_path, data_path, tables = NULL, tables_rda = NULL) {
+
+  if (!stringr::str_detect(data_path, "\\/$")) {
+    data_path <- paste0(data_path, "/")
+  }
+
+  table_names <- impexp::access_tables(access_path)
+
+  if (!is.null(tables)) {
+    table_names <- intersect(table_names, tables)
+  }
+
+  if (length(table_names) >= 1) {
+
+    tables <- purrr::map(table_names, impexp::access_import, access_path)
+
+    if (!is.null(tables_rda)) {
+      table_names <- tables_rda
+    }
+
+    names(tables) <- table_names
+
+    attach(tables)
+
+    purrr::walk(table_names, ~ save(list = ., file = paste0(data_path, ., ".rda"), compress = "bzip2"))
+
+    detach(tables)
+
+  }
+
+  return(table_names)
+}
