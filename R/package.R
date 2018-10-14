@@ -58,7 +58,7 @@ access_rda <- function(access_path, data_path, tables = NULL, tables_rda = NULL)
   table_names <- impexp::access_tables(access_path)
 
   if (!is.null(tables)) {
-    table_names <- intersect(table_names, tables)
+    table_names <- intersect(tables, table_names)
   }
 
   if (length(table_names) >= 1) {
