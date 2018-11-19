@@ -3,6 +3,7 @@
 export(access_rda)
 export(code_find)
 export(code_replace)
+export(get_root)
 export(package_build)
 export(package_deps)
 importFrom(dplyr,"%>%")
