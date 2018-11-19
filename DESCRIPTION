@@ -8,7 +8,7 @@ Description: Additional functions to help package development.
 License: Etalab
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Imports:
     devtools,
     dplyr,
