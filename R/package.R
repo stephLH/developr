@@ -31,12 +31,18 @@ package_deps <- function(package_path = getwd(), include_rmd = TRUE) {
 #' @export
 package_build <- function(package_path = ".", documentation = TRUE) {
 
+  if (stringr::str_detect(package_path, "/$")) {
+    package_path <- substr(package_path, 1, nchar(package_path) - 1)
+  }
+
   if (documentation == TRUE) {
     devtools::document(package_path, roclets = c('rd', 'collate', 'namespace'))
   }
 
   package_path <- ifelse(package_path == ".", getwd(), package_path)
-  build <- devtools::RCMD("INSTALL", paste0("--no-multiarch --with-keep.source \"", package_path, "\""))
+
+  build <- callr::rcmd("INSTALL", paste0("--no-multiarch --with-keep.source \"", package_path, "\""))
+  system(paste(build$command, collapse = " "))
 
   restart <- .rs.restartR()
 }
