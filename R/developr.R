@@ -27,9 +27,10 @@ package_deps <- function(package_path = getwd(), include_rmd = TRUE) {
 #'
 #' @param package_path Package path.
 #' @param documentation If \code{TRUE}, documentation is also generated.
+#' @param restart If \code{TRUE}, session is restarted after installation.
 #'
 #' @export
-package_build <- function(package_path = ".", documentation = TRUE) {
+package_build <- function(package_path = ".", documentation = TRUE, restart = TRUE) {
 
   if (stringr::str_detect(package_path, "/$")) {
     package_path <- substr(package_path, 1, nchar(package_path) - 1)
@@ -44,7 +45,10 @@ package_build <- function(package_path = ".", documentation = TRUE) {
   build <- callr::rcmd("INSTALL", paste0("--no-multiarch --with-keep.source \"", package_path, "\""))
   system(paste(build$command, collapse = " "))
 
-  restart <- .rs.restartR()
+  if (restart == TRUE) {
+    restart <- .rs.restartR()
+  }
+
 }
 
 #' Copy Microsoft Access tables to an R package data/ folder.
