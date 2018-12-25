@@ -8,7 +8,8 @@
 #' @export
 code_find <- function(code, path = ".") {
 
-  path <- tools::file_path_as_absolute(path)
+  path <- stringr::str_replace(path, "/$", "") %>%
+    tools::file_path_as_absolute()
 
   files <- list.files(path, recursive = TRUE, pattern = "\\.(R|Rmd)$", full.names = TRUE)
 
@@ -36,7 +37,8 @@ code_find <- function(code, path = ".") {
 #' @export
 code_replace <- function(code, replacement, path = ".") {
 
-  path <- tools::file_path_as_absolute(path)
+  path <- stringr::str_replace(path, "/$", "") %>%
+    tools::file_path_as_absolute()
 
   files <- developr::code_find(code, path) %>%
     dplyr::pull(fichier) %>%
