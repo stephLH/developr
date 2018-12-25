@@ -57,7 +57,7 @@ package_build <- function(package_path = ".", documentation = TRUE, ...) {
 access_rda <- function(access_path, data_path, tables = NULL, tables_rda = NULL) {
 
   if (!stringr::str_detect(data_path, "\\/$")) {
-    data_path <- paste0(data_path, "/")
+    data_path <- glue::glue("{data_path}/")
   }
 
   table_names <- impexp::access_tables(access_path)
