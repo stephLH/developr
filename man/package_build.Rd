@@ -4,15 +4,14 @@
 \alias{package_build}
 \title{Build a package.}
 \usage{
-package_build(package_path = ".", documentation = TRUE,
-  restart = TRUE)
+package_build(package_path = ".", documentation = TRUE, ...)
 }
 \arguments{
 \item{package_path}{Package path.}
 
 \item{documentation}{If \code{TRUE}, documentation is also generated.}
 
-\item{restart}{If \code{TRUE}, session is restarted after installation.}
+\item{\dots}{Additional arguments to \code{devtools::install_local()}.}
 }
 \description{
 Build a package.

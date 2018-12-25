@@ -27,10 +27,10 @@ package_deps <- function(package_path = getwd(), include_rmd = TRUE) {
 #'
 #' @param package_path Package path.
 #' @param documentation If \code{TRUE}, documentation is also generated.
-#' @param restart If \code{TRUE}, session is restarted after installation.
+#' @param \dots Additional arguments to \code{devtools::install_local()}.
 #'
 #' @export
-package_build <- function(package_path = ".", documentation = TRUE, restart = TRUE) {
+package_build <- function(package_path = ".", documentation = TRUE, ...) {
 
   if (stringr::str_detect(package_path, "/$")) {
     package_path <- substr(package_path, 1, nchar(package_path) - 1)
@@ -42,12 +42,7 @@ package_build <- function(package_path = ".", documentation = TRUE, restart = TR
 
   package_path <- ifelse(package_path == ".", getwd(), package_path)
 
-  build <- callr::rcmd("INSTALL", paste0("--no-multiarch --with-keep.source \"", package_path, "\""))
-  system(paste(build$command, collapse = " "))
-
-  if (restart == TRUE) {
-    restart <- .rs.restartR()
-  }
+  devtools::install_local(package_path, ...)
 
 }
 
