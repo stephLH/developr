@@ -4,7 +4,7 @@
 \alias{code_find}
 \title{Look for code inside R or Rmd scripts.}
 \usage{
-code_find(code, path = getwd())
+code_find(code, path = ".")
 }
 \arguments{
 \item{code}{R syntax to search.}

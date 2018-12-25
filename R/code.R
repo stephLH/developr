@@ -6,7 +6,9 @@
 #' @return A data frame with three columns : file, line number and code containing researched syntax.
 #'
 #' @export
-code_find <- function(code, path = getwd()) {
+code_find <- function(code, path = ".") {
+
+  path <- tools::file_path_as_absolute(path)
 
   files <- list.files(path, recursive = TRUE, pattern = "\\.(R|Rmd)$", full.names = TRUE)
 
@@ -32,7 +34,9 @@ code_find <- function(code, path = getwd()) {
 #' @param path Path where R and Rmd files are located.
 #'
 #' @export
-code_replace <- function(code, replacement, path) {
+code_replace <- function(code, replacement, path = ".") {
+
+  path <- tools::file_path_as_absolute(path)
 
   files <- developr::code_find(code, path) %>%
     dplyr::pull(fichier) %>%

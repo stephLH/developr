@@ -4,7 +4,7 @@
 \alias{code_replace}
 \title{Look and replace code inside R or Rmd scripts.}
 \usage{
-code_replace(code, replacement, path)
+code_replace(code, replacement, path = ".")
 }
 \arguments{
 \item{code}{R syntax to search and replace.}
