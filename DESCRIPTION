@@ -12,11 +12,12 @@ RoxygenNote: 6.1.1
 Imports:
     devtools,
     dplyr,
-    impexp,
     purrr,
     readr,
     stringr,
     tidyr,
-    tools
+    tools,
+Suggests:
+    impexp
 Remotes:
     stephLH/impexp
