@@ -15,9 +15,12 @@ package_deps <- function(package_path = getwd(), include_rmd = TRUE) {
   deps <- list.files(package_path, pattern = pattern, full.names = TRUE, recursive = TRUE) %>%
     lapply(readr::read_lines) %>%
     unlist() %>%
+    stringr::str_subset("([[:alnum:]\\.]+)::") %>%
     stringr::str_match_all("([[:alnum:]\\.]+)::") %>%
-    purrr::map_df(dplyr::as_tibble) %>%
-    dplyr::pull(V2) %>% unique() %>% sort() %>%
+    purrr::map( ~ dplyr::tibble(.)[[1]][, 2]) %>%
+    unlist() %>%
+    unique() %>%
+    sort() %>%
     .[which(is.na(stringr::str_detect(., stringr::str_match(getwd(), .)[, 1])))]
 
   return(deps)
