@@ -13,7 +13,7 @@ get_root <- function(dir_test = "C:/OVE/") {
 
   } else {
 
-    root <- "S:/scolarite/ove/commun/"
+    root <- "S:/scolarite/ove/OVE/"
 
   }
 
