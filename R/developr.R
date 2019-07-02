@@ -67,10 +67,17 @@ access_rda <- function(access_path, data_path = "data/", tables = NULL, tables_r
     data_path <- glue::glue("{data_path}/")
   }
 
-  table_names <- impexp::access_tables(access_path)
+  if (is.null(tables)) {
+    table_names <- impexp::access_tables(access_path)
+  } else {
+    table_names <- tables
+  }
 
-  if (!is.null(tables)) {
-    table_names <- intersect(tables, table_names)
+  which <- stringr::str_which(table_names, "^~TMP", negate = TRUE)
+  table_names <- table_names[which]
+
+  if (!is.null(tables_rda)) {
+    tables_rda <- tables_rda[which]
   }
 
   if (length(table_names) >= 1) {
