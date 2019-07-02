@@ -4,7 +4,8 @@
 \alias{access_rda}
 \title{Copy Microsoft Access tables to an R package data/ folder.}
 \usage{
-access_rda(access_path, data_path, tables = NULL, tables_rda = NULL)
+access_rda(access_path, data_path = "data/", tables = NULL,
+  tables_rda = NULL)
 }
 \arguments{
 \item{access_path}{Microsoft Access database path.}

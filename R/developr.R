@@ -57,7 +57,7 @@ package_build <- function(package_path = ".", documentation = TRUE, ...) {
 #' @param tables_rda Optional tables names to save in data/.
 #'
 #' @export
-access_rda <- function(access_path, data_path, tables = NULL, tables_rda = NULL) {
+access_rda <- function(access_path, data_path = "data/", tables = NULL, tables_rda = NULL) {
 
   if (!"impexp" %in% installed.packages()[, 1]) {
     stop("impexp package needs to be installed", call. = FALSE)
