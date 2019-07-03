@@ -82,19 +82,15 @@ access_rda <- function(access_path, data_path = "data/", tables = NULL, tables_r
 
   if (length(table_names) >= 1) {
 
-    tables <- purrr::map(table_names, impexp::access_import, access_path)
+    list_tables <- purrr::map(table_names, impexp::access_import, access_path)
 
     if (!is.null(tables_rda)) {
       table_names <- tables_rda
     }
 
-    names(tables) <- table_names
+    names(list_tables) <- table_names
 
-    attach(tables)
-
-    purrr::walk(table_names, ~ save(list = ., file = paste0(data_path, ., ".rda"), compress = "bzip2"))
-
-    detach(tables)
+    purrr::walk(table_names, ~ save(list = ., file = paste0(data_path, ., ".rda"), compress = "bzip2", envir = as.environment(list_tables)))
 
   }
 
