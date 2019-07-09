@@ -17,6 +17,7 @@ Imports:
     stringr,
     tidyr,
     tools,
+    utils
 Suggests:
     impexp
 Remotes:
