@@ -14,14 +14,14 @@ code_find <- function(code, path = ".") {
   files <- list.files(path, recursive = TRUE, pattern = "\\.(R|Rmd)$", full.names = TRUE)
 
   code_find <- dplyr::tibble(
-    fichier = files,
+    file = files,
     code = purrr::map(files, readr::read_table, col_names = "code", col_types = "c")
   ) %>%
     tidyr::unnest() %>%
-    dplyr::group_by(fichier) %>%
-    dplyr::mutate(ligne = dplyr::row_number()) %>%
+    dplyr::group_by(.data$file) %>%
+    dplyr::mutate(line = dplyr::row_number()) %>%
     dplyr::ungroup() %>%
-    dplyr::select(fichier, ligne, code) %>%
+    dplyr::select(.data$file, .data$line, code) %>%
     tidyr::drop_na(code) %>%
     dplyr::filter(stringr::str_detect(code, !!code))
 
@@ -41,7 +41,7 @@ code_replace <- function(code, replacement, path = ".") {
     tools::file_path_as_absolute()
 
   files <- developr::code_find(code, path) %>%
-    dplyr::pull(fichier) %>%
+    dplyr::pull(.data$file) %>%
     unique()
 
   import_code <- purrr::map(files, readr::read_lines) %>%

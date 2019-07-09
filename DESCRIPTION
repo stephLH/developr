@@ -15,6 +15,7 @@ Imports:
     glue,
     purrr,
     readr,
+    rlang,
     stringr,
     tidyr,
     tools,
