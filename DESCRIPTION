@@ -1,6 +1,6 @@
 Package: developr
 Type: Package
-Title: Additional functions to help package development.
+Title: Additional functions to help package development
 Version: 0.1
 Authors@R: person("Stéphane Le Hénanff", "Stéphane Le Hénanff", email = "github@le-henanff.fr", role = c("aut", "cre"))
 Maintainer: Stéphane Le Hénanff <github@le-henanff.fr>
