@@ -5,7 +5,7 @@ Version: 0.1
 Authors@R: person("Stéphane Le Hénanff", "Stéphane Le Hénanff", email = "github@le-henanff.fr", role = c("aut", "cre"))
 Maintainer: Stéphane Le Hénanff <github@le-henanff.fr>
 Description: Additional functions to help package development.
-License: Etalab
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
