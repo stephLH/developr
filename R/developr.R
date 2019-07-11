@@ -68,7 +68,7 @@ access_rda <- function(access_path, data_path = "data/", tables = NULL, tables_r
   }
 
   if (is.null(tables)) {
-    table_names <- impexp::access_tables(access_path)
+    table_names <- impexp::access_list_tables(access_path)
   } else {
     table_names <- tables
   }
