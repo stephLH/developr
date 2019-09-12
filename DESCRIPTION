@@ -14,7 +14,6 @@ Imports:
     dplyr,
     glue,
     purrr,
-    readr,
     rlang,
     stringr,
     tidyr,

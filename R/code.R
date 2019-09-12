@@ -15,7 +15,7 @@ code_find <- function(code, path = ".") {
 
   code_find <- dplyr::tibble(
     file = files,
-    code = purrr::map(files, readr::read_table, col_names = "code", col_types = "c")
+    code = purrr::map(files, readLines, warn = FALSE)
   ) %>%
     tidyr::unnest() %>%
     dplyr::group_by(.data$file) %>%
