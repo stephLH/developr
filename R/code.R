@@ -17,7 +17,7 @@ code_find <- function(code, path = ".") {
     file = files,
     code = purrr::map(files, readLines, warn = FALSE)
   ) %>%
-    tidyr::unnest() %>%
+    tidyr::unnest_legacy() %>%
     dplyr::group_by(.data$file) %>%
     dplyr::mutate(line = dplyr::row_number()) %>%
     dplyr::ungroup() %>%
