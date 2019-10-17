@@ -1,7 +1,7 @@
 #' Look for code inside R or Rmd scripts.
 #'
 #' @param code R syntax to search.
-#' @param path Path where R and Rmd files are located.
+#' @param path Path where R, Rmd and DESCRIPTION files are located.
 #'
 #' @return A data frame with three columns : file, line number and code containing researched syntax.
 #'
@@ -11,7 +11,7 @@ code_find <- function(code, path = ".") {
   path <- stringr::str_replace(path, "/$", "") %>%
     tools::file_path_as_absolute()
 
-  files <- list.files(path, recursive = TRUE, pattern = "\\.(R|Rmd)$", full.names = TRUE)
+  files <- list.files(path, recursive = TRUE, pattern = "(\\.(R|Rmd)|DESCRIPTION)$", full.names = TRUE)
 
   code_find <- dplyr::tibble(
     file = files,

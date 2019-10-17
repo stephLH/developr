@@ -9,7 +9,7 @@ code_find(code, path = ".")
 \arguments{
 \item{code}{R syntax to search.}
 
-\item{path}{Path where R and Rmd files are located.}
+\item{path}{Path where R, Rmd and DESCRIPTION files are located.}
 }
 \value{
 A data frame with three columns : file, line number and code containing researched syntax.
