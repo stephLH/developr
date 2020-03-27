@@ -2,6 +2,5 @@
 
 export(code_find)
 export(code_replace)
-export(package_deps)
 importFrom(dplyr,"%>%")
 importFrom(rlang,.data)
