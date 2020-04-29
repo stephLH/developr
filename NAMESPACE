@@ -2,5 +2,6 @@
 
 export(code_find)
 export(code_replace)
+export(replace_non_ascii_with_unicode)
 importFrom(dplyr,"%>%")
 importFrom(rlang,.data)
