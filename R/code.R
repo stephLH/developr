@@ -58,9 +58,6 @@ code_replace <- function(code, replacement, path = ".") {
 #' @export
 replace_non_ascii_with_unicode <- function(r_file, r_file_output = NULL) {
 
-  r_file <- "R/app_ui.R"
-  r_file_output <- "app_ui.R"
-
   if (is.null(r_file_output)) {
 
     r_file_output <- r_file
