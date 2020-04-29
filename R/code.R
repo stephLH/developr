@@ -69,7 +69,8 @@ replace_non_ascii_with_unicode <- function(r_file, r_file_output = NULL) {
   ) %>%
     dplyr::mutate(line = dplyr::row_number()) %>%
     dplyr::mutate_at("code", strsplit, "") %>%
-    tidyr::unnest(code) %>%
+    tidyr::unnest(code, keep_empty = TRUE) %>%
+    dplyr::mutate_at("code", stringr::str_replace_na, "") %>%
     dplyr::group_by(line) %>%
     dplyr::mutate(char = dplyr::row_number()) %>%
     dplyr::ungroup() %>%
