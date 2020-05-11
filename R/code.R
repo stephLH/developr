@@ -69,7 +69,7 @@ replace_non_ascii_with_unicode <- function(r_file, r_file_output = NULL) {
   ) %>%
     dplyr::mutate(
       line = dplyr::row_number(),
-      roxygen = stringr::str_detect(code, "^#'")
+      roxygen = stringr::str_detect(.data$code, "^#'")
     ) %>%
     dplyr::mutate_at("code", strsplit, "") %>%
     tidyr::unnest(.data$code, keep_empty = TRUE) %>%
@@ -79,7 +79,7 @@ replace_non_ascii_with_unicode <- function(r_file, r_file_output = NULL) {
     dplyr::ungroup() %>%
     dplyr::mutate(
       code_ascii = dplyr::if_else(
-        !stringi::stri_enc_isascii(.data$code) & !roxygen,
+        !stringi::stri_enc_isascii(.data$code) & !.data$roxygen,
         purrr::map_chr(
           .data$code,
           ~ iconv(., from = "UTF-8", toRaw = TRUE) %>%
