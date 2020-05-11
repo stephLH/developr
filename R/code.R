@@ -67,32 +67,36 @@ replace_non_ascii_with_unicode <- function(r_file, r_file_output = NULL) {
   dplyr::tibble(
     code = readLines(r_file, encoding = "UTF-8", warn = FALSE)
   ) %>%
-    dplyr::mutate(line = dplyr::row_number()) %>%
+    dplyr::mutate(
+      line = dplyr::row_number(),
+      roxygen = stringr::str_detect(code, "^#'")
+    ) %>%
     dplyr::mutate_at("code", strsplit, "") %>%
-    tidyr::unnest(code, keep_empty = TRUE) %>%
+    tidyr::unnest(.data$code, keep_empty = TRUE) %>%
     dplyr::mutate_at("code", stringr::str_replace_na, "") %>%
-    dplyr::group_by(line) %>%
+    dplyr::group_by(.data$line) %>%
     dplyr::mutate(char = dplyr::row_number()) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(
       code_ascii = dplyr::if_else(
-        !stringi::stri_enc_isascii(code),
+        !stringi::stri_enc_isascii(.data$code) & !roxygen,
         purrr::map_chr(
-          code,
+          .data$code,
           ~ iconv(., from = "UTF-8", toRaw = TRUE) %>%
             unlist() %>%
             as.character() %>%
             paste0(collapse = "") %>%
+            stringr::str_pad(4, "left", "0") %>%
             { paste0('\\u', .) }
         ),
-        code,
-        code
+        .data$code,
+        .data$code
       )
     ) %>%
-    dplyr::group_by(line) %>%
+    dplyr::group_by(.data$line) %>%
     dplyr::summarise_at("code_ascii", paste0, collapse = "") %>%
     dplyr::ungroup() %>%
-    dplyr::pull(code_ascii) %>%
+    dplyr::pull(.data$code_ascii) %>%
     readr::write_lines(r_file_output)
 
 }
