@@ -11,7 +11,8 @@ code_find <- function(code, path = ".") {
   path <- stringr::str_replace(path, "/$", "") %>%
     tools::file_path_as_absolute()
 
-  files <- list.files(path, recursive = TRUE, pattern = "(\\.(R|Rmd)|DESCRIPTION)$", full.names = TRUE)
+  files <- list.files(path, recursive = TRUE, pattern = "(\\.(R|Rmd)|DESCRIPTION)$", full.names = TRUE) %>%
+    iconv(from = "UTF-8")
 
   code_find <- dplyr::tibble(
     file = files,
@@ -42,7 +43,8 @@ code_replace <- function(code, replacement, path = ".") {
 
   files <- developr::code_find(code, path) %>%
     dplyr::pull(.data$file) %>%
-    unique()
+    unique() %>%
+    iconv(from = "UTF-8")
 
   import_code <- purrr::map(files, readr::read_lines) %>%
     purrr::map(stringr::str_replace_all, code, replacement)
