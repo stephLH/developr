@@ -12,7 +12,7 @@ code_find <- function(code, path = ".") {
     tools::file_path_as_absolute()
 
   files <- list.files(path, recursive = TRUE, pattern = "(\\.(R|Rmd)|DESCRIPTION)$", full.names = TRUE) %>%
-    iconv(from = "UTF-8")
+    iconv(to = "UTF-8")
 
   code_find <- dplyr::tibble(
     file = files,
