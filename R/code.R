@@ -43,8 +43,7 @@ code_replace <- function(code, replacement, path = ".") {
 
   files <- developr::code_find(code, path) %>%
     dplyr::pull(.data$file) %>%
-    unique() %>%
-    iconv(to = "UTF-8")
+    unique()
 
   import_code <- purrr::map(files, readr::read_lines) %>%
     purrr::map(stringr::str_replace_all, code, replacement)
